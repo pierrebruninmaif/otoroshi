@@ -26,16 +26,18 @@ export class Collapse extends Component {
           <hr />
           <div className="form-group">
             <label className="col-sm-2 control-label" />
-            <div className="col-sm-10" onClick={this.toggle} style={{ cursor: 'pointer' }}>
-              <span style={{ color: 'grey', fontWeight: 'bold', marginTop: 7 }}>
+            <div className="col-sm-10 collapse-title" onClick={this.toggle}>
+              <h4>
                 {this.props.label}
+              </h4>
+              <span>
+                  <button
+                  type="button"
+                  className="btn btn-info btn-xs"
+                  onClick={this.toggle}>
+                  <i className="glyphicon glyphicon-eye-open" />
+                </button>
               </span>
-              <button
-                type="button"
-                className="btn btn-info pull-right btn-xs"
-                onClick={this.toggle}>
-                <i className="glyphicon glyphicon-eye-open" />
-              </button>
             </div>
           </div>
           {this.props.lineEnd && <hr />}
@@ -47,16 +49,18 @@ export class Collapse extends Component {
           <hr />
           <div className="form-group">
             <label className="col-sm-2 control-label" />
-            <div className="col-sm-10" onClick={this.toggle} style={{ cursor: 'pointer' }}>
-              <span style={{ color: 'grey', fontWeight: 'bold', marginTop: 7 }}>
+            <div className="col-sm-10 collapse-title" onClick={this.toggle}>
+              <h4>
                 {this.props.label}
+              </h4>
+              <span>
+                <button
+                  type="button"
+                  className="btn btn-info btn-xs"
+                  onClick={this.toggle}>
+                  <i className="glyphicon glyphicon-eye-close" />
+                </button>
               </span>
-              <button
-                type="button"
-                className="btn btn-info pull-right btn-xs"
-                onClick={this.toggle}>
-                <i className="glyphicon glyphicon-eye-close" />
-              </button>
             </div>
           </div>
           {this.props.children}

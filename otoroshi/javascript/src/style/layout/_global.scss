@@ -78,12 +78,11 @@ h4 {
 }
 
 .backoffice-container>h3+.row {
-    margin-left: 0px;
+    margin-left: 0;
     margin-right: -10px;
 }
 .backoffice-container>.row {
-    margin-left: 0px;
-    // margin-right: -5px;
+    margin-left: 0;
 }
 .backoffice-container .glyphicon-ok-sign,.backoffice-container .glyphicon-remove-sign{
     font-size: 16px;
@@ -211,4 +210,15 @@ h4 {
 
 .ant-calendar-picker {
   color: white;
+}
+
+.collapse-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+hr {
+  border-top-color: $fondNavbar;
 }
