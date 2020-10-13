@@ -67,12 +67,16 @@ libraryDependencies ++= Seq(
   "org.bouncycastle"         % "bcprov-ext-jdk15on"          % bouncyCastleVersion,
   "org.bouncycastle"         % "bcprov-jdk15on"              % bouncyCastleVersion,
 
+  "org.endpoints4s" %% "algebra" % "1.1.0",
+  "org.endpoints4s" %% "openapi" % "1.1.0",
+  "org.endpoints4s" %% "json-schema-generic" % "1.1.0",
+
   // fix multiple CVEs
   "com.fasterxml.jackson.core" % "jackson-databind"          % "2.10.3",
   "org.yaml"                   % "snakeyaml"                 % "1.26",
   "com.fasterxml.jackson.dataformat" % "jackson-dataformat-yaml" % "2.10.3",
 
-// tests
+  // tests
   "org.scalatestplus.play"   %% "scalatestplus-play"         % "5.0.0" % Test,
 
   // do not update because the feature is deprecated and will be removed

@@ -6,7 +6,7 @@ import akka.util.ByteString
 import env.Env
 import events._
 import org.joda.time.DateTime
-import otoroshi.models.EntityLocationSupport
+import otoroshi.models.{EntityLocation, EntityLocationSupport, TeamId, TenantId}
 import otoroshi.utils.syntax.implicits._
 import play.api.http.HttpEntity
 import play.api.libs.json._
@@ -816,4 +816,3 @@ trait CrudControllerHelper[Entity <: EntityLocationSupport, Error] extends CrudH
     deleteEntities(ids, ctx)
   }
 }
-

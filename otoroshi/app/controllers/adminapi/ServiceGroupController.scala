@@ -4,18 +4,27 @@ import actions.ApiAction
 import env.Env
 import events._
 import models.ServiceGroup
+import otoroshi.openapi.ControllerDoc
 import otoroshi.utils.syntax.implicits._
 import play.api.libs.json._
-import play.api.mvc.{AbstractController, ControllerComponents, RequestHeader}
+import play.api.mvc.{AbstractController, ControllerComponents, RequestHeader, Results}
 import utils._
 
 import scala.concurrent.{ExecutionContext, Future}
+
+class ServiceGroupControllerDoc() extends ControllerDoc[ServiceGroup] {
+  override def entityName: String = "group"
+  override def schema(): JsonSchema[ServiceGroup] = ServiceGroupSchema
+  override def root(path: DocumentedUrl): DocumentedUrl = path / "api" / "groups"
+}
 
 class ServiceGroupController(val ApiAction: ApiAction, val cc: ControllerComponents)(implicit val env: Env)
   extends AbstractController(cc) with BulkControllerHelper[ServiceGroup, JsValue] with CrudControllerHelper[ServiceGroup, JsValue] {
 
   implicit val ec  = env.otoroshiExecutionContext
   implicit val mat = env.otoroshiMaterializer
+
+  lazy val doc = new ServiceGroupControllerDoc()
 
   override def buildError(status: Int, message: String): ApiError[JsValue] = JsonApiError(status, play.api.libs.json.JsString(message))
 
@@ -117,7 +126,7 @@ class ServiceGroupController(val ApiAction: ApiAction, val cc: ControllerCompone
       ctx.request.queryString.get("pageSize").flatMap(_.headOption).map(_.toInt).getOrElse(Int.MaxValue)
     val paginationPosition = (paginationPage - 1) * paginationPageSize
     env.datastores.serviceGroupDataStore.findById(serviceGroupId).flatMap {
-      case None => NotFound(Json.obj("error" -> s"ServiceGroup with id: '$serviceGroupId' not found")).future
+      case None => Results.NotFound(Json.obj("error" -> s"ServiceGroup with id: '$serviceGroupId' not found")).future
       case Some(group) if !ctx.canUserRead(group) => ctx.fforbidden
       case Some(group) => {
         Audit.send(
